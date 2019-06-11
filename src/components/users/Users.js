@@ -1,37 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 import UserItem from './UserItem';
+import Spinner from '../layout/Spinner';
+import PropTypes from 'prop-types'
 
-class Users extends Component {
-  state={
-    users: [//the three users are hard coded into the array, later will be pulled from api//
-      {
-        id: '1',
-        login: 'mojombo',
-        avatar_url: 'https://avatars0.githubusercontent.com/u/1?v=4',
-        html_url:'https://github.com/mojombo'
-      },
-      {
-        id: '2',
-        login: 'mojombo',
-        avatar_url: 'https://avatars0.githubusercontent.com/u/1?v=4',
-        html_url:'https://github.com/mojombo'
-      },
-      {
-        id: '3',
-        login: 'mojombo',
-        avatar_url: 'https://avatars0.githubusercontent.com/u/1?v=4',
-        html_url:'https://github.com/mojombo'
-      }
-    ]
-  };
-  render() {
+
+
+const Users = ({users, loading}) => {
+  if(loading) {
+    return <Spinner/>
+  }else{
     return (
       <div style={userStyle}>{/*this is where we set a variable to style this div down below the render*/}
 
-     {/*this is where we will map through the ""users"" to create a new array of users and pass user as a prop to UserItem*/}
-        {this.state.users.map(user => (
-          <UserItem key={user.id} user={user}/>
-        ))}
+     {/*this is where we will map through the ""users"" to create a new array of users and pass users as a prop to UserItem - props.user is being passed down from App.js from the api request*/}
+        {users.map(user => (<UserItem key={user.id} user={user}/>))
+        }
       </div>
     );
   }
@@ -45,5 +28,8 @@ const userStyle={
   gridGap:'1rem'
 }
 
-
+Users.propTypes= {
+  users: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
+}
 export default Users
