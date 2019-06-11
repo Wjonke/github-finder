@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import UserItem from './UserItem';
 
-export class Users extends Component {
+class Users extends Component {
   state={
     users: [//the three users are hard coded into the array, later will be pulled from api//
       {
@@ -26,7 +26,7 @@ export class Users extends Component {
   };
   render() {
     return (
-      <div style={userStyle}>{/*this is where we set a variable to style this div down below the components*/}
+      <div style={userStyle}>{/*this is where we set a variable to style this div down below the render*/}
 
      {/*this is where we will map through the ""users"" to create a new array of users and pass user as a prop to UserItem*/}
         {this.state.users.map(user => (
@@ -38,7 +38,7 @@ export class Users extends Component {
 }
 
 
-/*this is where we create a variable to style the div above set with this className*/
+/*this is where we create a variable to style the div above set with this 'style'*/
 const userStyle={
   display:'grid',
   gridTemplateColumns: 'repeat(3, 1fr)',
