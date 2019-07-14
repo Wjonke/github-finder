@@ -48,8 +48,18 @@ async componentDidMount() {
         <Navbar />                 {/*this would normally have props defined here, however, the prop defaults are defined in Navbar.js. If I wanted to change the props                               I could override defaults by defining them inside <Navbar/>  here*/}
 
         <div className="container">
-          <Search searchUsers= {this.searchUsers} clearUsers= {this.clearUsers} />
-          <Users loading={this.state.loading} users={this.state.users} /> {/*passing in props of loading and users*/}
+          <Search 
+            searchUsers= {this.searchUsers} 
+            clearUsers= {this.clearUsers} 
+            showClear={this.state.users.length > 0 ? true : false}
+          />{/*passing down props of searchUsers, clearUsers and showClear*/}
+          
+          <Users 
+            loading={this.state.loading} 
+            users={this.state.users} 
+          /> {/*passing down props of loading and users*/}
+
+
         </div>
         
       </div>
@@ -58,6 +68,9 @@ async componentDidMount() {
 
 };
 export default App;
+
+
+
 
 
 //Component Map

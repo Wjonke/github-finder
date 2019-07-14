@@ -9,6 +9,8 @@ export class Search extends Component {
   static propTypes ={
     searchUsers:PropTypes.func.isRequired,
     clearUsers:PropTypes.func.isRequired,
+    showClear:PropTypes.bool.isRequired,
+
 
   }
   //this onChange allows us to type into the field and what we type becomes the state of the field
@@ -38,7 +40,16 @@ export class Search extends Component {
 
         </form>
 
-        <button className="btn btn-light btn-block" onClick={this.props.clearUsers}>Clear Search</button>
+        {this.props.showClear && 
+          <button 
+            className="btn btn-light btn-block" 
+            onClick={this.props.clearUsers}>
+              Clear Users
+          </button>
+        }
+
+          {/* this function makes it so we only show the button when the statement is true, IE there are users displayed. we are using a short circuit in this function && */}
+
       </div>
     )
   }
