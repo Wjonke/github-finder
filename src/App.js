@@ -18,9 +18,26 @@ async componentDidMount() {
   const res = await axios.get(`https://api.github.com/users?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)//makes the data request and adds our id and secret for the api, check .env.local for keys
 
   this.setState({ users:res.data, loading:false })//when data is loaded, sets the loading prop back to false to remove the spinner and sets users to the newly fetched data! users is going to pass this down as props.
-
-  console.log(res.data); //logging the new data to check what is returned
 }
+
+
+//searching users via the call from the api to search users
+
+  searchUsers= async text => {
+    this.setState({ loading: true})
+    const res = await axios.get(`https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)
+
+    this.setState({ users:res.data.items, loading:false })
+  }
+
+
+  //clear users from state
+
+  clearUsers= () => {
+    this.setState({users:[], loading:false})
+
+  }
+
 
 
 
@@ -31,7 +48,7 @@ async componentDidMount() {
         <Navbar />                 {/*this would normally have props defined here, however, the prop defaults are defined in Navbar.js. If I wanted to change the props                               I could override defaults by defining them inside <Navbar/>  here*/}
 
         <div className="container">
-          <Search />
+          <Search searchUsers= {this.searchUsers} clearUsers= {this.clearUsers} />
           <Users loading={this.state.loading} users={this.state.users} /> {/*passing in props of loading and users*/}
         </div>
         
@@ -48,4 +65,5 @@ export default App;
 //index.js routes to index.html through 'root'
 
 //App -> Users -> UserItem
+//App -> Search
 //App -> NavBar
