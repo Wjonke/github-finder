@@ -10,18 +10,20 @@ const Users = ({users, loading}) => {
     return <Spinner/>
   }else{
     return (
-      <div style={userStyle}>{/*this is where we set a variable to style this div down below the render*/}
 
-     {/*this is where we will map through the ""users"" to create a new array of users and pass users as a prop to UserItem - props.user is being passed down from App.js from the api request*/}
-        {users.map(user => (<UserItem key={user.id} user={user}/>))
-        }
+      <div style={userStyle}>
+                                    {/*this is where we will map through the ""users"" to create a new array of users and pass users as a prop to UserItem - props.user is being passed down from App.js from the api request*/}
+      {users.map(user => 
+        (<UserItem key={user.id} user={user}/>
+      ))}
+
       </div>
     );
   }
 }
 
+//styling and propTypes below----------------------------------
 
-/*this is where we create a variable to style the div above set with this 'style'*/
 const userStyle={
   display:'grid',
   gridTemplateColumns: 'repeat(3, 1fr)',
