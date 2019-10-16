@@ -10,6 +10,7 @@ export class Search extends Component {
     searchUsers:PropTypes.func.isRequired,
     clearUsers:PropTypes.func.isRequired,
     showClear:PropTypes.bool.isRequired,
+    setAlert: PropTypes.func.isRequired,
   }
 
   //this onChange allows us to type into the field and what we type becomes the state of the field
@@ -19,9 +20,15 @@ export class Search extends Component {
   
   //this is where we add the logic for our helper function onSubmit passed into form
   onSubmit= (event) => {
+
     event.preventDefault();
-    this.props.searchUsers(this.state.text)
-    this.setState({ text: '' });
+
+    if (this.state.text === ''){
+      this.props.setAlert('Please enter Something', 'light');
+    }else{
+      this.props.searchUsers(this.state.text)
+      this.setState({ text: '' });
+    }
   }
 
 

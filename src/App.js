@@ -4,6 +4,7 @@ import axios from 'axios';
 import Navbar from './components/layout/Navbar';
 import Users from './components/users/Users';
 import Search from './components/users/Search';
+import Alert from './components/layout/Alert'
 
 import './App.css';
 
@@ -11,7 +12,8 @@ import './App.css';
 class App extends Component {
   state= {
     users: [],
-    loading: false
+    loading: false,
+    alert:null
   }
 
 async componentDidMount() {
@@ -35,17 +37,27 @@ async componentDidMount() {
     this.setState({users:[], loading:false})
   }
 
+  //set off Alert if search is empty which disappears in 2 seconds
+  setAlert= (msg, type) => {
+    this.setState({alert: { msg, type } });
+    setTimeout(() => {
+      this.setState({ alert: null })
+    }, 2000);
+  }
+
   render() {
+
     return (
 
       <div className="App">
         <Navbar />      {/*this would normally have props defined here, however, the prop defaults are defined in Navbar.js. If I wanted to change the props                               I could override defaults by defining them inside <Navbar/>  here*/}
-
+        <Alert alert={this.state.alert} />
         <div className="container">
           <Search 
             searchUsers= {this.searchUsers} 
             clearUsers= {this.clearUsers} 
             showClear={this.state.users.length > 0 ? true : false}
+            setAlert={this.setAlert}
           />{/*passing down props of searchUsers, clearUsers and showClear*/}
           
           <Users 
