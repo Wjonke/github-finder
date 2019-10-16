@@ -12,7 +12,7 @@ const Users = ({users, loading}) => {
     return (
 
       <div style={userStyle}>
-                                    {/*this is where we will map through the ""users"" to create a new array of users and pass users as a prop to UserItem - props.user is being passed down from App.js from the api request*/}
+                                    {/*this is where we will map through the ""users"" to create a new array of users and pass each user via props to UserItem - users is being passed down from App.js from the api request via props*/}
       {users.map(user => 
         (<UserItem key={user.id} user={user}/>
       ))}

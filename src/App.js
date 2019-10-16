@@ -20,9 +20,7 @@ async componentDidMount() {
   this.setState({ users:res.data, loading:false })//when data is loaded, sets the loading prop back to false to remove the spinner and sets users to the newly fetched data! users is going to pass this down as props.
 }
 
-
 //searching users via the call from the api to search users
-
   searchUsers= async text => {
     this.setState({ loading: true})
     const res = await axios.get(`https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)
@@ -30,22 +28,16 @@ async componentDidMount() {
     this.setState({ users:res.data.items, loading:false })
   }
 
-
   //clear users from state
-
   clearUsers= () => {
     this.setState({users:[], loading:false})
-
   }
 
-
-
-
   render() {
-   
     return (
+
       <div className="App">
-        <Navbar />                 {/*this would normally have props defined here, however, the prop defaults are defined in Navbar.js. If I wanted to change the props                               I could override defaults by defining them inside <Navbar/>  here*/}
+        <Navbar />      {/*this would normally have props defined here, however, the prop defaults are defined in Navbar.js. If I wanted to change the props                               I could override defaults by defining them inside <Navbar/>  here*/}
 
         <div className="container">
           <Search 
@@ -58,13 +50,10 @@ async componentDidMount() {
             loading={this.state.loading} 
             users={this.state.users} 
           /> {/*passing down props of loading and users*/}
-
-
         </div>
-        
       </div>
     );
-  };y
+  };
 
 };
 export default App;
