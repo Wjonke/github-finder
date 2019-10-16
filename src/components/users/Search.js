@@ -40,13 +40,13 @@ export class Search extends Component {
 
         </form>
 
-        {this.props.showClear && 
+        {this.props.showClear && (
           <button 
             className="btn btn-light btn-block" 
             onClick={this.props.clearUsers}>
               Clear Users
           </button>
-        }
+        )}
 
           {/* this function makes it so we only show the button when the statement is true, IE there are users displayed. we are using a short circuit in this function && */}
 
