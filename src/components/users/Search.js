@@ -13,7 +13,7 @@ export class Search extends Component {
   }
 
   //this onChange allows us to type into the field and what we type becomes the state of the field
-  //event.target.name allows us to re-use this function with other form inputs by making the key dynamic
+  //[event.target.name] allows us to re-use this function with other form inputs by making the key dynamic!
   onChange= (event) =>  this.setState({ [event.target.name] : event.target.value })
   
   
@@ -45,8 +45,7 @@ export class Search extends Component {
         {this.props.showClear && (
           <button 
             className="btn btn-light btn-block" 
-            onClick={this.props.clearUsers}>
-              Clear Users
+            onClick={this.props.clearUsers}> Clear Users
           </button>
         )}
 
