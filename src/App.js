@@ -1,10 +1,12 @@
 import React , {Component} from 'react';
-import './App.css';
+import axios from 'axios';
+
 import Navbar from './components/layout/Navbar';
 import Users from './components/users/Users';
 import Search from './components/users/Search';
 
-import axios from 'axios';
+import './App.css';
+
 
 class App extends Component {
   state= {
@@ -17,7 +19,7 @@ async componentDidMount() {
 
   const res = await axios.get(`https://api.github.com/users?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)//makes the data request and adds our id and secret for the api, check .env.local for keys
 
-  this.setState({ users:res.data, loading:false })//when data is loaded, sets the loading prop back to false to remove the spinner and sets users to the newly fetched data! users is going to pass this down as props.
+  this.setState({ users: res.data, loading:false })//when data is loaded, sets the loading prop back to false to remove the spinner and sets users to the newly fetched data! users is going to pass this down as props.
 }
 
 //searching users via the call from the api to search users
