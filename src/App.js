@@ -49,22 +49,31 @@ async componentDidMount() {
   render() {
 
     return (
-
       <div className="App">
+
         <Navbar />      {/*this would normally have props defined here, however, the prop defaults are defined in Navbar.js. If I wanted to change the props  .   I could override defaults by defining them inside <Navbar/>  here*/}
         <Alert alert={this.state.alert} />
+
         <div className="container">
-          <Search 
-            searchUsers= {this.searchUsers} 
-            clearUsers= {this.clearUsers} 
-            showClear={this.state.users.length > 0 ? true : false}
-            setAlert={this.setAlert}
-          />{/*passing down props of searchUsers, clearUsers and showClear*/}
-          
-          <Users 
-            loading={this.state.loading} 
-            users={this.state.users} 
-          /> {/*passing down props of loading and users*/}
+          <Switch>
+            <Route exact path='/' render={props => (
+              <>
+                <Search 
+                searchUsers= {this.searchUsers} 
+                clearUsers= {this.clearUsers} 
+                showClear={this.state.users.length > 0 ? true : false}
+                setAlert={this.setAlert}
+                />{/*passing down props of searchUsers, clearUsers and showClear*/}
+                
+                <Users 
+                  loading={this.state.loading} 
+                  users={this.state.users} 
+                /> {/*passing down props of loading and users*/}
+              </>
+            )} />
+
+            {/* <Route exact path='/About' component={} /> */}
+          </Switch>
         </div>
       </div>
     );
