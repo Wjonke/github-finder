@@ -10,6 +10,9 @@ import PropTypes from 'prop-types';
     <nav className='navbar bg-primary'>
       <div>
         <i className= { icon }/> { title }
+        <p>Go to the code! ==> 
+          <a href="https://github.com/Wjonke/github-finder"> https://github.com/Wjonke/github-finder </a> 
+        </p>
       </div>
     </nav>
   )
