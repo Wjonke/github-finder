@@ -16,6 +16,7 @@ class App extends Component {
   state= {
     users: [],
     user:{},
+    repos:[],
     loading: false,
     alert:null
   }
@@ -40,13 +41,24 @@ class App extends Component {
   }
 
   //Get a single user from github and display their data
-  getUser = async (login) => {
+  getUser = async (userName) => {
     this.setState({ loading: true})
-    const res = await axios.get(`https://api.github.com/users/${login}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)
+    const res = await axios.get(`https://api.github.com/users/${userName}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)
 
     this.setState({ user:res.data, loading:false })
     console.log(this.state.user)
   }
+
+  //get top 5 user repos
+  getUserRepos = async (userName) => {
+    this.setState({ loading: true})
+    const res = await axios.get(`https://api.github.com/users/${userName}/repos?per_page=5&sort=created:asc&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)
+
+    this.setState({ repos:res.data, loading:false })
+    console.log(this.state.user)
+  }
+
+
   
   //clear users from state
   clearUsers= () => {
@@ -92,10 +104,13 @@ class App extends Component {
           <Route exact path='/user/:login' render={ props => (
             
               <User 
-                { ...props }
-                loading={this.state.loading} 
+                { ...props } 
                 getUser={this.getUser} 
+                getUserRepos={this.getUserRepos}
+                
                 user={this.state.user}
+                repos={this.state.repos}
+                loading={this.state.loading}
               />
             
           )} />
