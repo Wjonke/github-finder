@@ -23,27 +23,31 @@ class App extends Component {
   async componentDidMount() {
     this.setState({ loading: true}) //sets up our loading spinner while we wait for data fetch
 
-    const res = await axios.get(`https://api.github.com/users?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)//makes the data request and adds our id and secret for the api, check .env.local for keys
+    const res = await axios.get(`https://api.github.com/users?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)
 
-    this.setState({ users: res.data, loading:false })//when data is loaded, sets the loading prop back to false to remove the spinner and sets users to the newly fetched data! users is going to pass this down as props.
+    this.setState({ users: res.data, loading:false })
+
+    console.log(this.state.users)
   }
 
 //searching users via the call from the api to search users
   searchUsers= async text => {
     this.setState({ loading: true})
     const res = await axios.get(`https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)
-
+    
     this.setState({ users:res.data.items, loading:false })
+    console.log(this.state.users)
   }
 
   //Get a single user from github and display their data
-  getUser= async (login) => {
+  getUser = async (login) => {
     this.setState({ loading: true})
     const res = await axios.get(`https://api.github.com/users/${login}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)
 
     this.setState({ user:res.data, loading:false })
+    console.log(this.state.user)
   }
-
+  
   //clear users from state
   clearUsers= () => {
     this.setState({users:[], loading:false})
@@ -58,12 +62,11 @@ class App extends Component {
   }
 
   render() {
-
     return (
       <div className="App">
 
-      <Navbar />      {/*this would normally have props defined here, however, the prop defaults are defined in Navbar.js. If I wanted to change the props  .   I could override defaults by defining them inside <Navbar/>  here*/}
-      <Alert alert={this.state.alert} />
+        <Navbar />     
+        <Alert alert={this.state.alert} />
 
       <div className="container">
         <Switch>
@@ -83,16 +86,18 @@ class App extends Component {
               /> {/*passing down props of loading and users*/}
             </>
           )} />
-
+          
           <Route exact path='/about' component= {About} />
 
-          <Route exact path='/user:login' render={props => (
-            <User 
-              {...props}
-              loading={this.state.loading} 
-              getUser={this.state.user} 
-              user={this.state.user}
-            />
+          <Route exact path='/user/:login' render={ props => (
+            
+              <User 
+                { ...props }
+                loading={this.state.loading} 
+                getUser={this.getUser} 
+                user={this.state.user}
+              />
+            
           )} />
 
           </Switch>
@@ -103,15 +108,3 @@ class App extends Component {
 
 };
 export default App;
-
-
-
-
-
-//Component Map
-//App routes to Index.js
-//index.js routes to index.html through 'root'
-
-//App -> Users -> UserItem
-//App -> Search
-//App -> NavBar

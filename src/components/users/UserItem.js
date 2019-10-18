@@ -2,11 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom'
 
-//since we have a proptype being used (user) we should by convention set a proptype checker below
-//no state so we use a functional component
-
-
-
  const UserItem = ({user: {login, avatar_url, html_url}} ) => {
   //props is passed in here ^^^^ to give the rest of the function access to them. props will equal the info in ()
   //user comes from Users.js from the mapped users, we are specifying it to = the props in {}
