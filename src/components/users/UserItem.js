@@ -1,5 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import {Link} from 'react-router-dom'
+
 //since we have a proptype being used (user) we should by convention set a proptype checker below
 //no state so we use a functional component
 
@@ -22,7 +24,7 @@ import PropTypes from 'prop-types'
       <h3> {login} </h3>
 
       <div>
-        <a href={html_url} className="btn btn-dark btn-sm my-1"> More </a>
+      <Link to={`/user/${login}`} className="btn btn-dark btn-sm my-1" > See More! </Link>
       </div>
 
     </div>
