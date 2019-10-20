@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types'
 
 
-const RepoItem = ( repo ) => {
+const RepoItem = ( {repo} ) => {
+  console.log(repo);
   return (
     <div className='card'>
-      <h3>
+      <h2>
         <a href={repo.html_url}> {repo.name} </a>
-      </h3>
+      </h2>
+      <p>Last Updated:{repo.updated_at}</p>
     </div>
   );
 }

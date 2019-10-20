@@ -30,21 +30,24 @@ export class User extends Component {
       blog,
       company, 
       login, 
-      html_url,  
+      // html_url,  
       followers, 
       following, 
       public_repos, 
       public_gists, 
-      hireable
+      hireable,
+      // repos
     } = this.props.user;
 
+    
+    
     const {loading} = this.props;
-    if(loading) return Spinner;
-
+    if(loading) return <Spinner />;
 
     return (
+      
       <>
-
+        
         <Link to='/' className="btn btn-dark btn-sm my-1"> Back to Search </Link>
             Hireable? : {'  '}
 
@@ -115,7 +118,7 @@ export class User extends Component {
           <div className="badge badge-dark">Public Gists: {public_gists} </div>
         </div>
         
-        <Repos repos={repos} />
+        <Repos repos={this.props.repos} />
       </>
     )
   }

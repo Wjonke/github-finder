@@ -106,11 +106,10 @@ class App extends Component {
               <User 
                 { ...props } 
                 getUser={this.getUser} 
-                getUserRepos={this.getUserRepos}
-                
-                user={this.state.user}
-                repos={this.state.repos}
-                loading={this.state.loading}
+                getUserRepos={this.getUserRepos} 
+                user={this.state.user} 
+                repos={this.state.repos} 
+                loading={this.state.loading} 
               />
             
           )} />
