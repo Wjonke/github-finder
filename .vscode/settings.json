@@ -6,7 +6,10 @@
   
   "emmet.includeLanguages":{
     "javascript": "javascriptreact"
-  }
+  },
+  "cSpell.words": [
+    "repos"
+  ]
     
 
 }
