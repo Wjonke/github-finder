@@ -1,13 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
-export class Repos extends Component {
-  render() {
-    return (
-      <div>
-        
-      </div>
-    )
-  }
+import RepoItem from './RepoItem'
+
+const Repos = (repos) => {
+  return repos.map(repo => < RepoItem repo={ repo } key={repo.id} /> )
+}
+
+Repos.propTypes = {
+  repos: PropTypes.array.isRequired,
 }
 
 export default Repos
+
