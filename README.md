@@ -29,4 +29,4 @@
 
 
 - wesjonke@gmail.com
-- My portfolio site (https://www.wesjonke.com "Wes Jonke Portfolio")
+-  [My portfolio site](https://www.wesjonke.com "Wes Jonke Portfolio")
